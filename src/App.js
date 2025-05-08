@@ -8,6 +8,7 @@ function Square({ value, onSquareClick }) {
   );
 }
 
+// This function contains the tictactoe game logic.
 function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
@@ -58,16 +59,19 @@ export default function Game() {
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
+  // Updates history when turn is played.
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
 
+  // Returns to a previous move.
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
   }
 
+  // Match History
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
@@ -94,6 +98,7 @@ export default function Game() {
   );
 }
 
+//This function checks if a player has won.
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
